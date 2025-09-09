@@ -8,26 +8,23 @@ export default async function DashboardLayout({
   params,
 }: {
   children: React.ReactNode;
-  params: Promise<{ storeId: string }>; // Изменено: params теперь Promise
+  params: Promise<{ storeId: string }>; // ТОЛЬКО ЭТУ СТРОКУ ИЗМЕНИТЬ
 }) {
   const { userId } = await auth(); 
-  const { storeId } = await params; // Добавлено: await для params
-
+  const { storeId } = await params; // ТОЛЬКО ЭТУ СТРОКУ ДОБАВИТЬ
+  
   if (!userId) {
     redirect("/sign-in");
   }
-
   const store = await prismadb.store.findFirst({
     where: {
-      id: storeId, // Используем распакованный storeId
+      id: storeId, // ТОЛЬКО ЭТО ИЗМЕНИТЬ: params.storeId → storeId  
       userId,
     },
   });
-
   if (!store) {
     redirect("/");
   }
-
   return (
     <>
       <div>This will be a Navbar</div>
