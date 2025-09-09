@@ -19,7 +19,7 @@ import { useState } from "react"
 import { ca, tr } from "zod/v4/locales"
 import { Axis3DIcon } from "lucide-react"
 import axios from "axios"
-import toast from "react-hot-toast"
+import {toast} from "react-hot-toast"
 
 const formSchema = z.object({
     name: z.string().min(1)
@@ -41,10 +41,10 @@ export const StoreModal = () => {
         try {
             setLoading(true);
             const response = await axios.post('/api/stores', values);
-
-            toast.success("Store created.")
+            
+            window.location.assign(`/${response.data.id}`);
         }catch (error) {
-            toast.error ("Something went wrong.")
+            toast.error("Something went wrong")
         }finally {
             setLoading(false);
             
