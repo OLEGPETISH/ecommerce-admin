@@ -1,24 +1,23 @@
 import prismadb from "@/lib/prismadb";  
 
-interface DashboardPageProps{
-    params: Promise<{ storeId: string }> // ТОЛЬКО ЭТУ СТРОКУ ИЗМЕНИТЬ
-};
-
-const DashboarPage: React.FC<DashboardPageProps> = async ({
-    params
-}) =>{
-    const { storeId } = await params; // ТОЛЬКО ЭТУ СТРОКУ ДОБАВИТЬ
-    
-    const store = await prismadb.store.findFirst({
-        where: {
-            id: storeId // ТОЛЬКО ЭТО ИЗМЕНИТЬ: params.storeId → storeId
-        }
-    })
-    return(
-        <div>
-            Active Store: {store?.name}
-        </div>
-    );
+interface DashboardPageProps {
+  params: Promise<{ storeId: string }>;
 }
 
-export default DashboarPage;
+const DashboardPage = async ({ params }: DashboardPageProps) => {
+  const { storeId } = await params; 
+
+  const store = await prismadb.store.findFirst({
+    where: {
+      id: storeId,
+    },
+  });
+
+  return (
+    <div>
+      Active Store: {store?.name}
+    </div>
+  );
+};
+
+export default DashboardPage;

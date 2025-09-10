@@ -1,10 +1,10 @@
 import { NextResponse } from "next/server";
-import { currentUser } from "@clerk/nextjs/server"; // исправлено
+import { currentUser } from "@clerk/nextjs/server"; 
 import prismadb from "@/lib/prismadb";
 
 export async function POST(req: Request) {
   try {
-    const user = await currentUser(); // получаем текущего пользователя
+    const user = await currentUser(); 
 
     if (!user?.id) {
       return new NextResponse("Unauthorized", { status: 401 });
